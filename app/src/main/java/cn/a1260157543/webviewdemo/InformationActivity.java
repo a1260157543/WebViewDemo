@@ -1,45 +1,27 @@
 package cn.a1260157543.webviewdemo;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 
 import java.io.File;
 
-public class MainActivity extends Activity {
+public class InformationActivity extends Activity {
 
     private WebView mWebView;
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final String APP_CACAHE_DIRNAME = "/webcache";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_information);
         mWebView = (WebView) findViewById(R.id.wv);
         initWebView();
         clearWebViewCache();
-        mWebView.loadUrl("https://a1260157543.github.io");
-
-        //设置WebView监听事件， 监听URL
-        mWebView.setWebViewClient(new WebViewClient() {
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                // TODO Auto-generated method stub
-                //如果是打开的是百度URL,则进行跳转Activity
-                if (url.trim().equals("https://a1260157543.github.io/Me.html")) {
-                    //活动跳转的方法
-                    Information();
-                }else{
-                    view.loadUrl(url);
-                }
-                return true;
-            }
-        });
-
+        mWebView.loadUrl("https://a1260157543.github.io/Me.html");
     }
 
     private void initWebView() {
@@ -113,12 +95,6 @@ public class MainActivity extends Activity {
         } else {
             Log.e(TAG, "delete file no exists " + file.getAbsolutePath());
         }
-    }
-
-    //跳转界面方法
-    public void Information() {
-        Intent intent = new Intent(MainActivity.this, InformationActivity.class);
-        startActivity(intent);
     }
 
 }
